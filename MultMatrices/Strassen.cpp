@@ -59,6 +59,7 @@ vector<vector<int>> addMatrix(const vector<vector<int>>& A, const vector<vector<
     return C;
 }
 
+// Función para restar dos matrices A y B de las mismas dimensiones
 vector<vector<int>> subtractMatrix(const vector<vector<int>>& A, const vector<vector<int>>& B) {
     int rows = A.size();
     int cols = A[0].size();
@@ -71,6 +72,7 @@ vector<vector<int>> subtractMatrix(const vector<vector<int>>& A, const vector<ve
     return C;
 }
 
+// Función para multiplicar matrices en base al algoritmo de Strassen
 vector<vector<int>> Strassen(const vector<vector<int>>& A, const vector<vector<int>>& B) {
     int size = A.size();
     if (size == 1) {
@@ -78,7 +80,6 @@ vector<vector<int>> Strassen(const vector<vector<int>>& A, const vector<vector<i
         C[0][0] = A[0][0] * B[0][0];
         return C;
     }
-
     int newSize = size / 2;
     vector<vector<int>> A11(newSize, vector<int>(newSize));
     vector<vector<int>> A12(newSize, vector<int>(newSize));
@@ -101,7 +102,6 @@ vector<vector<int>> Strassen(const vector<vector<int>>& A, const vector<vector<i
             B22[i][j] = B[i + newSize][j + newSize];
         }
     }
-
     vector<vector<int>> M1 = Strassen(addMatrix(A11, A22), addMatrix(B11, B22));
     vector<vector<int>> M2 = Strassen(addMatrix(A21, A22), B11);
     vector<vector<int>> M3 = Strassen(A11, subtractMatrix(B12, B22));
@@ -109,12 +109,10 @@ vector<vector<int>> Strassen(const vector<vector<int>>& A, const vector<vector<i
     vector<vector<int>> M5 = Strassen(addMatrix(A11, A12), B22);
     vector<vector<int>> M6 = Strassen(subtractMatrix(A21, A11), addMatrix(B11, B12));
     vector<vector<int>> M7 = Strassen(subtractMatrix(A12, A22), addMatrix(B21, B22));
-
     vector<vector<int>> C11 = addMatrix(subtractMatrix(addMatrix(M1, M4), M5), M7);
     vector<vector<int>> C12 = addMatrix(M3, M5);
     vector<vector<int>> C21 = addMatrix(M2, M4);
     vector<vector<int>> C22 = addMatrix(subtractMatrix(addMatrix(M1, M3), M2), M6);
-
     vector<vector<int>> C(size, vector<int>(size));
     for (int i = 0; i < newSize; ++i) {
         for (int j = 0; j < newSize; ++j) {
@@ -127,6 +125,7 @@ vector<vector<int>> Strassen(const vector<vector<int>>& A, const vector<vector<i
     return C;
 }
 
+// Función para rellenar una matriz con ceros hasta que sea de tamaño n x n
 vector<vector<int>> padMatrix(const vector<vector<int>>& matrix, int newSize) {
     int rows = matrix.size();
     int cols = matrix[0].size();
@@ -139,12 +138,14 @@ vector<vector<int>> padMatrix(const vector<vector<int>>& matrix, int newSize) {
     return padded;
 }
 
+// Función para encontrar la siguiente potencia de 2 mayor o igual a un número dado
 int nextPowerOfTwo(int x) {
     int power = 1;
     while (power < x) power *= 2;
     return power;
 }
 
+// Función para multiplicar matrices en base al algoritmo de Strassen
 vector<vector<int>> StrassenMatrixMultiplication(const vector<vector<int>>& A, const vector<vector<int>>& B) {
     int m = A.size();
     int n = A[0].size();

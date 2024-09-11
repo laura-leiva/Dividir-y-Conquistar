@@ -2,17 +2,17 @@
 #include <fstream>
 #include <vector>
 #include <chrono> 
-
 using namespace std;
 using namespace std::chrono;
 
+// Función para leer dos matrices desde un archivo y devolverlas junto con sus columnas.
+// Retorna un par de pares. Cada par contiene una matriz y el número de columnas de esa matriz.
 pair<pair<vector<vector<int>>, int>, pair<vector<vector<int>>, int>> LeerMatrices(const string& filename) {
     ifstream file(filename);
     if (!file) {
         cerr << "Error al abrir el archivo: " << filename << endl;
         exit(1);
     }
-
     int rowsA, colsA, rowsB, colsB;
     file >> rowsA >> colsA;
     vector<vector<int>> A(rowsA, vector<int>(colsA));
@@ -24,7 +24,6 @@ pair<pair<vector<vector<int>>, int>, pair<vector<vector<int>>, int>> LeerMatrice
             }
         }
     }
-    
     file >> rowsB >> colsB;
     vector<vector<int>> B(rowsB, vector<int>(colsB));
     for (int i = 0; i < rowsB; ++i) {
@@ -35,10 +34,10 @@ pair<pair<vector<vector<int>>, int>, pair<vector<vector<int>>, int>> LeerMatrice
             }
         }
     }
-
     return make_pair(make_pair(A, colsA), make_pair(B, colsB));
 }
 
+// Función para multiplicar matrices de forma tradicional
 vector<vector<int>> Traditional(const vector<vector<int>>& A, const vector<vector<int>>& B, int colsA, int colsB) {
     int rowsA = A.size();
     int rowsB = B.size();
@@ -53,6 +52,7 @@ vector<vector<int>> Traditional(const vector<vector<int>>& A, const vector<vecto
     return C;
 }
 
+// Función para guardar la matriz en un archivo de salida
 void GuardarMatriz(const vector<vector<int>>& matrix, const string& filename) {
     ofstream file(filename);
     int rows = matrix.size();

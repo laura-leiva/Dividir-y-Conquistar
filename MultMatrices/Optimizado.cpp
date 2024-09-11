@@ -6,13 +6,13 @@
 using namespace std;
 using namespace std::chrono;  
 
+// Función para leer dos matrices desde un archivo y devolverlas como un par de vectores 2D
 pair<vector<vector<int>>, vector<vector<int>>> LeerMatrices(const string& filename) {
     ifstream file(filename);
     if (!file) {
         cerr << "Error al abrir el archivo: " << filename << endl;
         exit(1);
     }
-
     int rowsA, colsA, rowsB, colsB;
     file >> rowsA >> colsA;
     vector<vector<int>> matrixA(rowsA, vector<int>(colsA));
@@ -24,8 +24,6 @@ pair<vector<vector<int>>, vector<vector<int>>> LeerMatrices(const string& filena
             }
         }
     }
-
-    // Leer la segunda matriz
     file >> rowsB >> colsB;
     vector<vector<int>> matrixB(rowsB, vector<int>(colsB));
     for (int i = 0; i < rowsB; ++i) {
@@ -36,10 +34,10 @@ pair<vector<vector<int>>, vector<vector<int>>> LeerMatrices(const string& filena
             }
         }
     }
-
     return make_pair(matrixA, matrixB);
 }
 
+// Función para guardar una matriz en un archivo de salida
 void GuardarMatriz(const vector<vector<int>>& matrix, const string& filename) {
     ofstream file(filename);
     int rows = matrix.size();
@@ -53,6 +51,7 @@ void GuardarMatriz(const vector<vector<int>>& matrix, const string& filename) {
     }
 }
 
+// Función para transponer una matriz
 vector<vector<int>> transposeMatrix(const vector<vector<int>>& B) {
     int rows = B.size();
     int cols = B[0].size();
@@ -65,6 +64,7 @@ vector<vector<int>> transposeMatrix(const vector<vector<int>>& B) {
     return BT;
 }
 
+// Función optimizada para multiplicar matrices
 vector<vector<int>> Optimizado(const vector<vector<int>>& A, const vector<vector<int>>& B) {
     int m = A.size();
     int p = B[0].size();
