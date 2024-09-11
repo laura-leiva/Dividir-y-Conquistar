@@ -4,8 +4,9 @@
 #include <sstream>
 #include <string>
 #include <algorithm>
-#include <chrono> // Para medir el tiempo
+#include <chrono>
 
+// Función que implementa el algoritmo de ordenación por selecció
 void selectionSort(std::vector<int>& arr) {
     int n = arr.size();
     for (int i = 0; i < n - 1; i++) {

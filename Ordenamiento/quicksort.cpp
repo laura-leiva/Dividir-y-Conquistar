@@ -5,11 +5,14 @@
 #include <string>
 #include <chrono> 
 
+// Función para intercambiar dos elementos en el arreglo
 void swap(std::vector<int>& arr, int i, int j) {
     int temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
 }
+
+// Función para particionar el arreglo y encontrar la posición correcta del pivote
 int partition(std::vector<int>& arr, int low, int high) {
     int pivot = arr[high];
     int i = low - 1; 
@@ -23,6 +26,8 @@ int partition(std::vector<int>& arr, int low, int high) {
     swap(arr, i + 1, high);
     return i + 1;
 }
+
+// Función recursiva que implementa Quick Sort
 void quickSort(std::vector<int>& arr, int low, int high) {
     if (low < high) {
         int pi = partition(arr, low, high); 

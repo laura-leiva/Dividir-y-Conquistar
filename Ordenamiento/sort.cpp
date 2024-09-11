@@ -3,8 +3,8 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-#include <chrono> // Para medir el tiempo
-#include <algorithm> // Para std::sort
+#include <chrono> 
+#include <algorithm> 
 
 int main() {
     std::string inputFilename;
@@ -14,9 +14,11 @@ int main() {
     int count;
     infile >> count;
     infile.ignore();
+    // Crear un vector para almacenar los números
     std::vector<int> arr(count);
     std::string line;
     std::getline(infile, line);
+    // Crear un flujo de cadena para procesar los números
     std::istringstream iss(line);
     for (int i = 0; i < count; ++i) {
         if (!(iss >> arr[i])) {
